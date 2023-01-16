@@ -1,0 +1,7 @@
+.custom-rotate {
+    transform: rotate(130deg);
+}
+
+.custom-border {
+    border-width:14px;
+}
