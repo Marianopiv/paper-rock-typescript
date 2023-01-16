@@ -47,12 +47,12 @@ const Home = (props: Props) => {
   return (
     <div className="h-screen flex flex-col items-center">
       <div className="border-2 p-4 mt-6 mx-4 rounded-md flex justify-between sm:w-2/6">
-        <h3 className="uppercase dark:text-black text-white w-1/4 text-left text-xl font-bold">
+        <h3 className="uppercase  text-white w-1/4 text-left text-xl font-bold">
           rock paper scissors
         </h3>{" "}
         <div className="bg-gray-100 flex flex-col items-center p-4 rounded-md w-24 hover:cursor-pointer" onClick={resetGame}>
-          <p className="uppercase text-xs">score</p>
-          <p className="font-bold text-4xl">{score}</p>
+          <p className="uppercase text-xs dark:text-black">score</p>
+          <p className="font-bold text-4xl dark:text-black">{score}</p>
         </div>
       </div>
       {chosen && pcPlay ? (
