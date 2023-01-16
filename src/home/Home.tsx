@@ -47,7 +47,7 @@ const Home = (props: Props) => {
   return (
     <div className="h-screen flex flex-col items-center">
       <div className="border-2 p-4 mt-6 mx-4 rounded-md flex justify-between sm:w-2/6">
-        <h3 className="uppercase text-white w-1/4 text-left text-xl font-bold">
+        <h3 className="uppercase dark:text-black text-white w-1/4 text-left text-xl font-bold">
           rock paper scissors
         </h3>{" "}
         <div className="bg-gray-100 flex flex-col items-center p-4 rounded-md w-24 hover:cursor-pointer" onClick={resetGame}>
@@ -70,7 +70,7 @@ const Home = (props: Props) => {
             <h3 className="font-bold text-4xl">{message}</h3>
             <button
               onClick={playAgain}
-              className="text-blue-900 uppercase font-bold mx-16 sm:mx-0 "
+              className="text-blue-900 uppercase font-bold mx-16 sm:mx-0 dark:bg-white "
             >
               play again
             </button>
