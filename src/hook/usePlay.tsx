@@ -1,31 +1,44 @@
 import React, { useState } from "react";
-import { Chosen } from "../interface/interfaces";
+import { decidePlayStatus } from "../helper";
+import { Chosen, GameRules, GameText, History } from "../interface/interfaces";
 
 const usePlay = () => {
   const [score, setScore] = useState<number>(0);
   const [chosen, setChosen] = useState<Chosen | null>(null);
   const [pcPlay, setPcPlay] = useState<Chosen | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [savedPlays, setSavedPlays] = useState<History[]>([]);
 
   const handlePlay = (chosen: Chosen | null, pcPlay: Chosen | null) => {
     if (chosen && pcPlay) {
-      if (
-        (chosen.title === "paper" && pcPlay.title === "scissors") ||
-        (chosen.title === "scissors" && pcPlay.title === "rock") ||
-        (chosen.title === "rock" && pcPlay.title === "paper")
-      ) {
-        setScore(score - 1);
-        setMessage("You Lose")
-      } else if (
-        (chosen.title === "paper" && pcPlay.title === "rock") ||
-        (chosen.title === "scissors" && pcPlay.title === "paper") ||
-        (chosen.title === "rock" && pcPlay.title === "scissors")
-      ) {
-        setScore(score + 1);
-        setMessage("You Win")
-      } else {
-        setMessage("Tie")
+      const result = decidePlayStatus({
+        chosen: chosen.title,
+        pcPlay: pcPlay.title,
+      });
+      console.log(result);
+      switch (result) {
+        case 1:
+          setScore(score + 1);
+          setMessage(GameRules.WIN);
+          break;
+        case -1:
+          setScore(score - 1);
+          setMessage(GameRules.LOSE);
+          break;
+        case 0:
+          setMessage(GameRules.TIE);
+          break;
+
+        default:
+          return;
       }
+      let objeto = {
+        userChoose: chosen.title,
+        houseChoose: pcPlay.title,
+        result: result,
+      };
+      setSavedPlays([...savedPlays, objeto]);
+      
     }
   };
 
@@ -47,7 +60,8 @@ const usePlay = () => {
     pcPlay,
     setPcPlay,
     playAgain,
-    message
+    message,
+    savedPlays
   };
 };
 

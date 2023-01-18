@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import triangle from "../assets/triangle.png";
 import Gaming from "../components/gaming/Gaming";
 import Plays from "../components/plays/Plays";
+import PlaysHistory from "../components/playsHistory/PlaysHistory";
 import { options } from "../config/config.js";
 import usePlay from "../hook/usePlay";
 import { Chosen, Games } from "../interface/interfaces";
@@ -17,7 +18,8 @@ const Home = (props: Props) => {
     pcPlay,
     setPcPlay,
     playAgain,
-    message
+    message,
+    savedPlays,
   } = usePlay();
 
   function getRandomArrayElement(arr: Games[]) {
@@ -50,7 +52,10 @@ const Home = (props: Props) => {
         <h3 className="uppercase  text-white w-1/4 text-left text-xl font-bold">
           rock paper scissors
         </h3>{" "}
-        <div className="bg-gray-100 flex flex-col items-center p-4 rounded-md w-24 hover:cursor-pointer" onClick={resetGame}>
+        <div
+          className="bg-gray-100 flex flex-col items-center p-4 rounded-md w-24 hover:cursor-pointer"
+          onClick={resetGame}
+        >
           <p className="uppercase text-xs dark:text-black">score</p>
           <p className="font-bold text-4xl dark:text-black">{score}</p>
         </div>
@@ -106,10 +111,12 @@ const Home = (props: Props) => {
               />
             </div>
           ))}{" "}
+          <PlaysHistory savedPlays={savedPlays} />
         </div>
       )}
     </div>
   );
 };
 
+//Darle autenticacion que usuario se registre, y que me muester por pantalla las ultimas 3 jugadas.
 export default Home;
