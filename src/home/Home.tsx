@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import triangle from "../assets/triangle.png";
 import Gaming from "../components/gaming/Gaming";
 import Plays from "../components/plays/Plays";
 import PlaysHistory from "../components/playsHistory/PlaysHistory";
 import { options } from "../config/config.js";
+import { useAuth } from "../context/Provider";
 import usePlay from "../hook/usePlay";
+import useServices from "../hook/useServices";
 import { Chosen, Games } from "../interface/interfaces";
+import Button from "../UI/Button";
 type Props = {};
 
 const Home = (props: Props) => {
@@ -21,6 +25,12 @@ const Home = (props: Props) => {
     message,
     savedPlays,
   } = usePlay();
+
+    const {user,loading,obtenerUsuarios} = useAuth()
+    const {logout,saveHighScore} = useServices()
+    
+
+    const navigate = useNavigate();
 
   function getRandomArrayElement(arr: Games[]) {
     let randomIndex = Math.floor(Math.random() * arr.length);
@@ -46,12 +56,27 @@ const Home = (props: Props) => {
     }
   }, [chosen]);
 
+  const handleLogout  = async () => {
+    await logout()
+    navigate('/login')
+
+  }
+
+  useEffect(() => {
+    saveHighScore(user.uid,score,user.email)
+    obtenerUsuarios()
+  }, [score])
+  
+  if (loading) return <h1>loading</h1>
+
   return (
-    <div className="h-screen flex flex-col items-center">
+    <div className="flex flex-col items-center pt-4">
+       <h3 className="text-white">Welcome {user.email}</h3>
       <div className="border-2 p-4 mt-6 mx-4 rounded-md flex justify-between sm:w-2/6">
         <h3 className="uppercase  text-white w-1/4 text-left text-xl font-bold">
           rock paper scissors
         </h3>{" "}
+       
         <div
           className="bg-gray-100 flex flex-col items-center p-4 rounded-md w-24 hover:cursor-pointer"
           onClick={resetGame}
@@ -73,12 +98,8 @@ const Home = (props: Props) => {
           </div>
           <div className="flex flex-col my-4 gap-5">
             <h3 className="font-bold text-4xl">{message}</h3>
-            <button
-              onClick={playAgain}
-              className="text-blue-900 uppercase font-bold mx-16 sm:mx-0 dark:bg-white "
-            >
-              play again
-            </button>
+            <Button action={playAgain} text={"play again"}/>
+            <Button action={handleLogout} text={"logout"}/>
           </div>
           <div className="flex flex-col items-center gap-5">
             <h3 className="sm:text-2xl text-xl">The House Picked</h3>
@@ -101,7 +122,7 @@ const Home = (props: Props) => {
             <div
               onClick={() => handleChoose(item)}
               key={index}
-              className="z-50"
+              className="z-50 animate__animated animate__rotateIn"
             >
               <Plays
                 className="hover:cursor-pointer"
@@ -112,6 +133,7 @@ const Home = (props: Props) => {
             </div>
           ))}{" "}
           <PlaysHistory savedPlays={savedPlays} />
+          <div className="flex justify-center w-screen items-center pt-10 sm:h-auto h-48"><Button action={handleLogout} text={"logout"}/></div>
         </div>
       )}
     </div>

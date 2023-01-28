@@ -34,7 +34,11 @@ const usePlay = () => {
       }
       let objeto = {
         userChoose: chosen.title,
+        userImg: chosen.img,
+        userColor:chosen.color,
         houseChoose: pcPlay.title,
+        houseImg:pcPlay.img,
+        houseColor:pcPlay.color,
         result: result,
       };
       setSavedPlays([...savedPlays, objeto]);
@@ -44,6 +48,7 @@ const usePlay = () => {
 
   const resetGame = () => {
     setScore(0);
+    setSavedPlays([])
   };
 
   const playAgain = () => {

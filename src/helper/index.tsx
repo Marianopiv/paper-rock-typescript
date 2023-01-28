@@ -1,9 +1,11 @@
-import { GameText } from "../interface/interfaces";
+import { FullUsers, GameText } from "../interface/interfaces";
 
 interface DecidePlayStatus {
   chosen: string;
   pcPlay: string;
 }
+
+
 
 export const decidePlayStatus = ({chosen,pcPlay}: DecidePlayStatus): number => {
   if (
@@ -22,3 +24,7 @@ export const decidePlayStatus = ({chosen,pcPlay}: DecidePlayStatus): number => {
     return 0;
   }
 };
+
+export const getFiveHigher = (fullUsers:FullUsers[]) => {
+  return fullUsers.sort((a,b)=>b.highscore-a.highscore).slice(0,5);
+}
