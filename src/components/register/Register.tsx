@@ -32,6 +32,8 @@ const Register = (props: Props) => {
       setErrors(error.message);
     }
   };
+
+  console.log(user)
   return (
     <div className="">
         
