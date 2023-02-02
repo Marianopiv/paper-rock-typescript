@@ -18,12 +18,12 @@ const useServices = () => {
   const logout = () => signOut(auth);
 
   const saveHighScore = async (
-    userId: string,
+    uid: string,
     score: number,
     email: string
   ) => {
     // Crea referencia al documento
-    const docRef = doc(db, `usuarios/${userId}`);
+    const docRef = doc(db, `usuarios/${uid}`);
     //Actualiza el campo highscore del documento
     await setDoc(docRef, { highscore: score, email });
     //Obtener el highscore actualizado

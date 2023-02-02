@@ -9,7 +9,16 @@ import { auth, db } from "../firebase";
 import { collection, doc, getDoc, getDocs, setDoc } from "firebase/firestore";
 import { FullUsers } from "../interface/interfaces";
 
-export const ProvContext = createContext({});
+export const ProvContext = createContext({
+  fullUsers: [{ uid: "",email:"",highscore:0 }],
+  user: {
+    uid: "",
+    email: "",
+    highscore: 0,
+  },
+  loading: true,
+  obtenerUsuarios: () => {},
+});
 
 export const useAuth = () => {
   const context = useContext(ProvContext);
@@ -17,10 +26,13 @@ export const useAuth = () => {
 };
 
 const Provider = ({ children }: any) => {
-  const [user, setUser] = useState<FullUsers | any>(null);
+  const [user, setUser] = useState<FullUsers>({
+    uid: "",
+    email: "",
+    highscore: 0,
+  });
   const [loading, setLoading] = useState(true);
-  const [fullUsers, setFullUsers] = useState<FullUsers[] | any>([]);
-  
+  const [fullUsers, setFullUsers] = useState<FullUsers[]>([]);
 
   useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, (currentUser: any) => {
@@ -34,11 +46,14 @@ const Provider = ({ children }: any) => {
   const obtenerUsuarios = async () => {
     const usus = await getDocs(collection(db, `usuarios`));
     console.log(usus.docs);
-    const resultado = usus.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    const resultado = usus.docs.map((doc) => ({
+      uid: doc.id,
+      highscore: doc.data().highscore,
+      email: doc.data().email,
+    }));
+    console.log(resultado);
     setFullUsers(resultado);
   };
-
-
 
   useEffect(() => {
     obtenerUsuarios();

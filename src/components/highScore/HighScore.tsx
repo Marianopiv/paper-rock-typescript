@@ -1,9 +1,10 @@
 import React from "react";
 import { getFiveHigher } from "../../helper";
+import { FullUsers } from "../../interface/interfaces";
 
 type Props = {
-    setModal:(any:boolean)=>void;
-    fullUsers:[]
+    setModal:(value:boolean)=>void;
+    fullUsers:FullUsers[]|[]
 };
 
 const HighScore = ({setModal,fullUsers}: Props) => {
@@ -13,7 +14,7 @@ const HighScore = ({setModal,fullUsers}: Props) => {
       <div className="border-2 border-white rounded-md p-3">
         {" "} <p onClick={()=>setModal(false)} className="hover:cursor-pointer">X</p>
         <h1>HIGH SCORES</h1>
-        {getFiveHigher(fullUsers).map(({ email, highscore },index) => (
+        {fullUsers.length>0&&getFiveHigher(fullUsers).map(({ email, highscore },index) => (
           <div className="flex gap-4 justify-between p-3" key={index}>
             <p>{email}</p>
             <p>{highscore}</p>

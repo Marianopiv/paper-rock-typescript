@@ -37,7 +37,7 @@ export interface Users {
 }
 
 export interface FullUsers {
-  id:string;
+  uid:string;
   email:string;
   highscore:number;
 }
