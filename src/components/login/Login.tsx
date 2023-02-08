@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/Provider";
 import { Users } from "../../interface/interfaces";
 import Button from "../../UI/Button";
-import logo from "../../assets/logo.webp";
+import logo from "../../assets/logo.png";
 import HighScore from "../highScore/HighScore";
 import useServices from "../../hook/useServices";
 
@@ -17,8 +17,8 @@ const Login = () => {
     password: "",
   });
 
-  const {fullUsers} = useAuth();
-  const {login} = useServices()
+  const { fullUsers } = useAuth();
+  const { login } = useServices();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -30,26 +30,24 @@ const Login = () => {
     try {
       await login(user.email, user.password);
       navigate("/");
-    } catch (error:any) {
+    } catch (error: any) {
       setErrors(error.message);
     }
   };
 
   return (
     <>
-      {modal && <HighScore fullUsers={fullUsers} setModal={setModal}/>}
-      <div className="text-white w-screen h-screen flex flex-col gap-10 items-center pt-6">
+      {modal && <HighScore fullUsers={fullUsers} setModal={setModal} />}
+      <div className="text-white w-screen h-screen flex flex-col gap-7 items-center">
         <img
-          className="w-72 h-56 absolute animate__animated animate__heartBeat"
+          className="w-70 h-44 relative animate__animated animate__heartBeat"
           src={logo}
           alt=""
         />
-        <h1 className="uppercase  text-white tracking-widest w-screen text-4xl font-light">
-          Paper,Rock,Scissors
-        </h1>
+
         <form
           onSubmit={handleSubmit}
-          className="border-2 flex flex-col gap-4 justify-center rounded-md p-10 min-w-20 min-h-10"
+          className="border-2 flex flex-col gap-4 justify-center rounded-md p-8 min-w-20 min-h-10"
         >
           <h3 className="font-bold uppercase tracking-widest">Login</h3>
           <span>User</span>
@@ -71,18 +69,10 @@ const Login = () => {
           ) : (
             <p className="h-8 w-56"></p>
           )}
-          <Button
-            className="bg-purple-400 hover:bg-purple-600"
-            text={"login"}
-          />
+          <Button text={"login"} />
         </form>
-        <div className="flex flex-col gap-4">
-          <Button
-          action={()=>setModal(!modal)}
-            className="bg-purple-400 hover:bg-purple-600"
-            text={"high scores"}
-          />
-          If you don't have an account
+        <div className="flex  sm:gap-4">
+          <Button action={() => setModal(!modal)} text={"high scores"} />
           <Button action={() => navigate("/register")} text={"register"} />
         </div>
       </div>

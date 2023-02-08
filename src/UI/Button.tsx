@@ -9,7 +9,7 @@ type Props = {
 const Button = ({ action, text, className }: Props) => {
   return (
     <button
-      className={`text-blue-900 uppercase font-bold mx-16 sm:mx-0 ${className} dark:bg-white`}
+      className={`text-blue-900 uppercase font-bold ${text==="login"?"mx-16":"mx-2"} sm:mx-0 ${className} dark:bg-white`}
       onClick={action}
     >
       {text}
