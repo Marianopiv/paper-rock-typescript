@@ -54,14 +54,14 @@ const Login = () => {
           <input
             name="email"
             onChange={handleChange}
-            className="text-black rounded-md py-1 z-40 dark:bg-white"
+            className="text-black rounded-md py-1 z-40 dark:bg-white dark:text-black"
             type="text"
           />
           <span>Password</span>{" "}
           <input
             name="password"
             onChange={handleChange}
-            className="text-black rounded-md py-1 dark:bg-white"
+            className="text-black rounded-md py-1 dark:bg-white dark:text-black"
             type="password"
           />
           {errors ? (

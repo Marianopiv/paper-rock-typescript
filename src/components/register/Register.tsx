@@ -48,7 +48,7 @@ const Register = (props: Props) => {
           Email
         </label>
         <input
-          className="p-2 rounded-md"
+          className="p-2 rounded-md dark:bg-white dark:text-black"
           onChange={handleChange}
           type="email"
           name="email"
@@ -59,7 +59,7 @@ const Register = (props: Props) => {
           Password
         </label>{" "}
         <input
-          className="p-2 rounded-md"
+          className="p-2 rounded-md dark:bg-white dark:text-black"
           onChange={handleChange}
           type="password"
           name="password"
