@@ -40,7 +40,7 @@ const Login = () => {
       {modal && <HighScore fullUsers={fullUsers} setModal={setModal} />}
       <div className="text-white w-screen h-screen flex flex-col gap-7 items-center">
         <img
-          className="w-70 h-44 relative animate__animated animate__heartBeat"
+          className="w-70 h-36 sm:h-40 relative animate__animated animate__heartBeat"
           src={logo}
           alt=""
         />
