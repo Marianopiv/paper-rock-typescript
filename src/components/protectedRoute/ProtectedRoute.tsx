@@ -8,7 +8,7 @@ type Props = {}
 export const ProtectedRoute = ({children}:any) => {
   const {user,loading} = useAuth()
 
-  if (loading) return <div className="lds-spinner h-screen"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+  if (loading) return <div className="lds-spinner h-screen pt-40"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
   if (!user) return <Navigate to ='/login'/>
   return <>{children}</>
 }
